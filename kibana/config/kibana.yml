@@ -1,0 +1,5 @@
+server.host: "0.0.0.0"
+elasticsearch.username: "elastic"
+elasticsearch.password: ${ELASTIC_PASSWORD}
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+xpack.encryptedSavedObjects.encryptionKey: ${ENCRYPTION_KEY}
