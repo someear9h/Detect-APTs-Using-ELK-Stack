@@ -25,7 +25,12 @@ services:
     environment:
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     volumes:
-      - ./logstash/pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      # This line correctly points to your ingestion pipeline
+      - ./logstash/ingest-pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./logstash/ingest-security-pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      # <-- THIS IS THE CRUCIAL NEW LINE -->
+      # It creates a "bridge" from your local ./data folder to the folder inside the container
+      - ./data:/usr/share/logstash/data
     ports:
       - "5001:5000"
       - "5044:5044"
@@ -35,6 +40,9 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:7.17.10
     container_name: kibana
+    environment:
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     ports:
@@ -45,3 +53,4 @@ services:
 volumes:
   esdata:
     driver: local
+

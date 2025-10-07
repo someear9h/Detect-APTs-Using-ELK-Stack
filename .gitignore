@@ -6,6 +6,7 @@ __pycache__/
 .Python
 venv/
 ENV/
+data/
 
 .venv/
 *.sqlite3
@@ -28,6 +29,7 @@ yarn-error.log*
 # ---- Environment Variables ----
 backend/.env
 .env.*
+.env
 elk-env/
 # ---- IDEs ----
 # VS Code
