@@ -9,7 +9,7 @@ services:
       - xpack.security.enabled=true
       - xpack.security.authc.api_key.enabled=true
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}   # 🔑 Elastic user password
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     ulimits:
       memlock:
         soft: -1
@@ -25,15 +25,9 @@ services:
     environment:
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     volumes:
-      # This line correctly points to your ingestion pipeline
-      - ./logstash/ingest-pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
-      - ./logstash/ingest-security-pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
-      # <-- THIS IS THE CRUCIAL NEW LINE -->
-      # It creates a "bridge" from your local ./data folder to the folder inside the container
-      - ./data:/usr/share/logstash/data
+      - ./logstash/pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     ports:
-      - "5001:5000"
-      - "5044:5044"
+      - "5001:5001"
     depends_on:
       - elasticsearch
 
@@ -53,4 +47,3 @@ services:
 volumes:
   esdata:
     driver: local
-
