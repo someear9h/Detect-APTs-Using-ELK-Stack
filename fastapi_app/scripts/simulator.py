@@ -1,5 +1,6 @@
 import csv
 import requests
+import time
 from pathlib import Path
 
 DATA_PATH = Path(__file__).parent.parent.parent / "data" / "10_1_1_15-windows-securityevents_labeled.csv"
@@ -21,5 +22,7 @@ def simulate_data(rows=10):
             except Exception as e:
                 print(f"Error sending row {i+1}: {e}")
 
+            time.sleep(0.01)
+
 if __name__ == "__main__":
-    simulate_data(1000)
+    simulate_data(100000)
