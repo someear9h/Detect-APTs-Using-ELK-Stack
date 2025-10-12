@@ -27,6 +27,7 @@ services:
     volumes:
       - ./logstash/pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
       - ./logstash/sigma-pipeline.conf:/usr/share/logstash/pipeline/sigma-pipeline.conf:ro
+      - ./logstash/netflow.conf:/usr/share/logstash/pipeline/netflow.conf:ro
     ports:
       - "5001:5001"
     depends_on:

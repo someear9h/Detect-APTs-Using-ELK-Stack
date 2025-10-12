@@ -3,4 +3,5 @@ uvicorn==0.22.0
 httpx==0.24.0
 pydantic==1.10.9
 elasticsearch
+pandas
 python-dotenv==1.0.0
