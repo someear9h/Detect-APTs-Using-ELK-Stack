@@ -26,6 +26,7 @@ services:
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     volumes:
       - ./logstash/pipeline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./logstash/sigma-pipeline.conf:/usr/share/logstash/pipeline/sigma-pipeline.conf:ro
     ports:
       - "5001:5001"
     depends_on:
